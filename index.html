@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8" />
+	<title>Krampus Hunter</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	<!-- CSS -->
+	<link href="https://fonts.googleapis.com/css?family=Kelly+Slab" rel="stylesheet"> 
+	<link rel="stylesheet" href="styles.css">
+	<link rel="stylesheet" href="animate.css">
+</head>
+<body>
+	<div class="game">
+		<div class="header">
+			<div class="title">Krampus Hunter</div>
+			<div class="arrows"><div>Arrows: <span id="arrows">3</span></div></div>
+		</div>
+		<div class="messages"></div>
+		<div class="map"></div>
+		<div class="controls">
+			<div class="actions actions-first">
+				<div class="action-btn" id="action-move">MOVE</div>
+				<div class="action-btn" id="action-shoot">SHOOT</div>
+			</div>
+			<div class="actions actions-second" style="display: none;">
+				<div class="action-btn" id="action-left">LEFT</div>
+				<div class="action-btn" id="action-middle">MIDDLE</div>
+				<div class="action-btn" id="action-right">RIGHT</div>
+				<!-- <div class="action-btn" id="action-cancel">&#10060;</div>
+				<div class="action-btn" id="action-confirm">&#10003;</div> -->
+			</div>
+		</div>
+	</div>
+	<!-- SCRIPTS -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+	<script src="howler.min.js"></script>
+	<script src="game.js"></script>
+</body>
+</html>
