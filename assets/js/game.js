@@ -39,6 +39,7 @@ var soundWalk = '';
 // *********
 // FUNCTIONS
 // *********
+//
 // GLOBAL FUNCTIONS
 function shuffle(array) {
   var m = array.length, t, i;
@@ -84,6 +85,7 @@ function showMessage(message) {
 	current_message = tmp_msg_id;
 	new_message = '';
 }
+//
 // INIT FUNCTIONS
 function createSounds() {
 	var soundCave = new Howl({
@@ -137,6 +139,7 @@ function createPlayer() {
 	tmp_position = $('[data-num="' + player.location + '"]').position();
 	$('.map').prepend('<div class="player animated" style="top:' + tmp_position.top + 'px;left:' + tmp_position.left + 'px;">P</div>');
 }
+//
 // GAME FUNCTIONS
 function getNextRooms(room_number) {
 	var new_rooms = [];
@@ -237,6 +240,7 @@ function checkNextRooms() {
 		new_message = '<p>All is quiet...</p>';
 	}
 }
+//
 // PLAYER FUNCTIONS
 function changePlayerStatus(status) {
 	$('[data-num="' + player.rooms[0] + '"]').removeClass('potential');
@@ -269,15 +273,16 @@ function doPlayerAction(room) {
 		shootArrow(room);
 	}	
 }
-function setActionRoom(room, button) {
-	action_room = room;
-	$('#action-left').removeClass('btn-active');
-	$('#action-middle').removeClass('btn-active');
-	$('#action-right').removeClass('btn-active');
-	$('#' + button).addClass('btn-active');
-	$('[data-num]').removeClass('selected');
-	$('[data-num="' + room + '"]').addClass('selected');
-}
+// POSSIBLE REMOVAL - NOT USED
+// function setActionRoom(room, button) {
+// 	action_room = room;
+// 	$('#action-left').removeClass('btn-active');
+// 	$('#action-middle').removeClass('btn-active');
+// 	$('#action-right').removeClass('btn-active');
+// 	$('#' + button).addClass('btn-active');
+// 	$('[data-num]').removeClass('selected');
+// 	$('[data-num="' + room + '"]').addClass('selected');
+// }
 function resetActions() {
 	$('#action-left').removeClass('btn-active');
 	$('#action-middle').removeClass('btn-active');
@@ -322,6 +327,7 @@ function shootArrow(location) {
 	}
 	showMessage(new_message);
 }
+//
 // CLICK ACTIONS
 $('#action-move').click(function() {
 	setPlayerAction('move');
@@ -341,20 +347,22 @@ $('#action-right').click(function() {
 	// setActionRoom(player.rooms[2], $(this).attr('id'));
 	doPlayerAction(player.rooms[2]);
 });
-$('#action-cancel').click(function() {
-	resetActions();
-});
-$('#action-confirm').click(function() {
-	resetActions();
-	if (player_action == 'move') {
-		setTimeout(function(){ movePlayer(action_room); }, 1500);
-		soundWalk.play();
-		$('.player').css('top', $('[data-num="' + action_room + '"]').data('top'));
-		$('.player').css('left', $('[data-num="' + action_room + '"]').data('left'));
-	} else {
-		shootArrow(action_room);
-	}
-});
+// POSSIBLE REMOVAL - NOT USED
+// $('#action-cancel').click(function() {
+// 	resetActions();
+// });
+// $('#action-confirm').click(function() {
+// 	resetActions();
+// 	if (player_action == 'move') {
+// 		setTimeout(function(){ movePlayer(action_room); }, 1500);
+// 		soundWalk.play();
+// 		$('.player').css('top', $('[data-num="' + action_room + '"]').data('top'));
+// 		$('.player').css('left', $('[data-num="' + action_room + '"]').data('left'));
+// 	} else {
+// 		shootArrow(action_room);
+// 	}
+// });
+//
 // INIT GAME
 function initGame() {
 	createSounds();

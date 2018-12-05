@@ -44,8 +44,7 @@ body {
 .map {
 	position: relative;
 	background-color: #524110;
-	/*background-image: url(map-new.png);*/
-	background-image: url(Map.svg);
+	background-image: url(../img/Map.svg);
 	background-repeat: no-repeat;
 	background-size: 100%;
 }
@@ -130,7 +129,6 @@ body {
 	width: calc(100vw / 17);
 	background-color: #000;
 	border-radius: 50%;
-	/*border: 2px solid #000;*/
 	transition: all .5s;
 }
 .room.active {
