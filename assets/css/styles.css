@@ -52,12 +52,12 @@ body {
 	display: grid;
 	align-items: center;
 	justify-content: center;
-	color: #eeeeee;
-	background-color: #022100;
+	color: #2e1303;
+	background-color: #9d1303;
 	padding: 10px 20px;
 }
 .message {
-	font-size: 24px;
+	font-size: 28px;
 }
 .message p {
 	margin: 5px 0;
@@ -96,6 +96,9 @@ body {
 .btn-active {
 	background-color: #1bc8f9;
 }
+.enlarge {
+	transform: scale(1.5,1.5);
+}
 /* PLAYER */
 .player {
 	display: grid;
@@ -122,7 +125,7 @@ body {
 	justify-content: center;
 	position: absolute;
 	font-family: Tahoma;
-	font-size: 12px;
+	font-size: 10px;
 	text-align: center;
 	color: #eee;
 	height: calc(100vw / 17);
@@ -134,25 +137,20 @@ body {
 .room.active {
 	color: #333;
 	background: #999;
-	transform: scale(1.5,1.5);
+	transform: scale(1.75,1.75);
 }
 .room.dead {
 	background: #ff0000;
-	transform: scale(1.5,1.5);
+	transform: scale(1.75,1.75);
 }
 .room.win {
 	background: #108001;
-	transform: scale(1.5,1.5);
+	transform: scale(1.75,1.75);
 }
 .room.potential {
 	color: #333;
 	background: #FFCC33;
-	transform: scale(1.25,1.25);
-}
-.room.selected {
-	color: #333;
-	background: #22fbec;
-	transform: scale(1.5,1.5);
+	transform: scale(1.65,1.65);
 }
 @media only screen and (min-width: 768px) {
     .game {

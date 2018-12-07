@@ -88,18 +88,18 @@ function showMessage(message) {
 //
 // INIT FUNCTIONS
 function createSounds() {
-	var soundCave = new Howl({
-	  src: ['Ambience_Cave_00.mp3'],
+	soundCave = new Howl({
+	  src: ['assets/sound/Ambience_Cave_00.mp3'],
 	  loop: true,
 	  onload: function() {
 		soundCave.play();
 	  }
 	});
 	soundWalk = new Howl({
-	  src: ['Walk_Gravel.mp3']
+	  src: ['assets/sound/Walk_Gravel.mp3']
 	});
 	soundShoot = new Howl({
-	  src: ['Arrow_Swoosh.mp3']
+	  src: ['assets/sound/Arrow_Swoosh.mp3']
 	});
 }
 function tempRooms(total) {
@@ -131,7 +131,6 @@ function createMonsters() {
 function createPlayer() {
 	player.location = shuffle(initial_rooms).pop();
 	player.rooms = getNextRooms(player.location);
-	// $('[data-num="' + player.location + '"]').addClass('active');
 	$('#action-left').html(player.rooms[0]);
 	$('#action-middle').html(player.rooms[1]);
 	$('#action-right').html(player.rooms[2]);
@@ -273,16 +272,6 @@ function doPlayerAction(room) {
 		shootArrow(room);
 	}	
 }
-// POSSIBLE REMOVAL - NOT USED
-// function setActionRoom(room, button) {
-// 	action_room = room;
-// 	$('#action-left').removeClass('btn-active');
-// 	$('#action-middle').removeClass('btn-active');
-// 	$('#action-right').removeClass('btn-active');
-// 	$('#' + button).addClass('btn-active');
-// 	$('[data-num]').removeClass('selected');
-// 	$('[data-num="' + room + '"]').addClass('selected');
-// }
 function resetActions() {
 	$('#action-left').removeClass('btn-active');
 	$('#action-middle').removeClass('btn-active');
@@ -336,39 +325,22 @@ $('#action-shoot').click(function() {
 	setPlayerAction('shoot');
 });
 $('#action-left').click(function() {
-	// setActionRoom(player.rooms[0], $(this).attr('id'));
 	doPlayerAction(player.rooms[0]);
 });
 $('#action-middle').click(function() {
-	// setActionRoom(player.rooms[1], $(this).attr('id'));
 	doPlayerAction(player.rooms[1]);
 });
 $('#action-right').click(function() {
-	// setActionRoom(player.rooms[2], $(this).attr('id'));
 	doPlayerAction(player.rooms[2]);
 });
-// POSSIBLE REMOVAL - NOT USED
-// $('#action-cancel').click(function() {
-// 	resetActions();
-// });
-// $('#action-confirm').click(function() {
-// 	resetActions();
-// 	if (player_action == 'move') {
-// 		setTimeout(function(){ movePlayer(action_room); }, 1500);
-// 		soundWalk.play();
-// 		$('.player').css('top', $('[data-num="' + action_room + '"]').data('top'));
-// 		$('.player').css('left', $('[data-num="' + action_room + '"]').data('left'));
-// 	} else {
-// 		shootArrow(action_room);
-// 	}
-// });
-//
 // INIT GAME
 function initGame() {
 	createSounds();
 	createRooms();
 	createMonsters();
 	createPlayer();
+	$('.room').addClass('enlarge');
+	$('[data-num="' + player.location + '"]').addClass('active');
 	checkNextRooms();
 	showMessage(new_message);
 }
