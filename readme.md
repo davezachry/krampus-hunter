@@ -3,7 +3,7 @@
 ## About this Project
 I'd heard about this old computer game called Hunt the Wumpus developed by Gregory Yob. Gregory published it in The Best of Creative Computing Volume 1 (1976) to teach and inspire other computer programmers to learn programming.
 
-So I decided to create version for the web based on the logic found in the article. One the goals I've set to for this project is to create version that is geared for mobile play (small screens).
+So I decided to create version for the web based on the logic found in the article. One the goals I've set for this project is to create version that is geared for mobile play (small screens).
 
 Overall, the basic game play is the same except for the addition of a roaming Zombie who will move about and force you to run in the opposite direction, if you run into him. I've also themed it based on the myth of the Krampus (scary).
 
