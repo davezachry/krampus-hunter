@@ -199,8 +199,8 @@ function checkCurrentRoom() {
 	if (bats_are_awake == 1) {
 		new_message = '<p>You woke some Bats and are carried to another room!</p>';
 		showMessage(new_message);
-		movePlayer(0);
-		// setTimeout(function(){ movePlayer(0); }, 3000);
+		movePlayer(0, 'fly');
+		//  LEAVING THIS HERE TO CONSIDER MOVEMENT OF BATS
 		// setTimeout(function(){ bat[woke_bat].location = randomRoom(); }, 4000);
 		return 0;
 	}
@@ -209,10 +209,7 @@ function checkCurrentRoom() {
 		showMessage(new_message);
 		player.rooms = getNextRooms(player.location);
 		tmp_next_room = player.rooms[Math.floor((Math.random() * 3))];
-		movePlayer(tmp_next_room);
-		// setTimeout(function(){ movePlayer(tmp_next_room); }, 4000);
-		// $('.player').css('top', $('[data-num="' + tmp_next_room + '"]').data('top'));
-		// $('.player').css('left', $('[data-num="' + tmp_next_room + '"]').data('left'));
+		movePlayer(tmp_next_room, 'walk');
 		return 0;
 	}
 	return 1;
@@ -266,11 +263,7 @@ function setPlayerAction(action) {
 function doPlayerAction(room) {
 	resetActions();
 	if (player_action == 'move') {
-		movePlayer(room);
-		// setTimeout(function(){ movePlayer(room); }, 1500);
-		// soundWalk.play();
-		// $('.player').css('top', $('[data-num="' + room + '"]').data('top'));
-		// $('.player').css('left', $('[data-num="' + room + '"]').data('left'));
+		movePlayer(room, 'walk');
 	} else {
 		shootArrow(room);
 	}	
@@ -282,16 +275,16 @@ function resetActions() {
 	$('.actions-first').show();
 	$('.actions-second').hide();
 }
-function movePlayer(location) {
+function movePlayer(location, sound) {
 	changePlayerStatus('move');
 	if (location == 0) {
 		player.location = randomRoom();
-		// $('.player').css('top', $('[data-num="' + player.location + '"]').data('top'));
-		// $('.player').css('left', $('[data-num="' + player.location + '"]').data('left'));
 	} else {
 		player.location = location;
 	}
-	soundWalk.play();
+	if (sound == 'walk') {
+		soundWalk.play();
+	}
 	$('.player').css('top', $('[data-num="' + player.location + '"]').data('top'));
 	$('.player').css('left', $('[data-num="' + player.location + '"]').data('left'));
 	setTimeout(function() {

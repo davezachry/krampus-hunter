@@ -44,7 +44,9 @@ body {
 .map {
 	position: relative;
 	background-color: #524110;
-	background-image: url(../img/Map.svg);
+	background-image: url(../img/map-new.png);
+	/* REMINDER TO USE SVG MAP */
+	/*background-image: url(../img/Map.svg);*/
 	background-repeat: no-repeat;
 	background-size: 100%;
 }
