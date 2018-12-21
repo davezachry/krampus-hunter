@@ -199,8 +199,9 @@ function checkCurrentRoom() {
 	if (bats_are_awake == 1) {
 		new_message = '<p>You woke some Bats and are carried to another room!</p>';
 		showMessage(new_message);
-		setTimeout(function(){ movePlayer(0); }, 3000);
-		setTimeout(function(){ bat[woke_bat].location = randomRoom(); }, 4000);
+		movePlayer(0);
+		// setTimeout(function(){ movePlayer(0); }, 3000);
+		// setTimeout(function(){ bat[woke_bat].location = randomRoom(); }, 4000);
 		return 0;
 	}
 	if (player.location == zombie.location) {
@@ -208,9 +209,10 @@ function checkCurrentRoom() {
 		showMessage(new_message);
 		player.rooms = getNextRooms(player.location);
 		tmp_next_room = player.rooms[Math.floor((Math.random() * 3))];
-		setTimeout(function(){ movePlayer(tmp_next_room); }, 4000);
-		$('.player').css('top', $('[data-num="' + tmp_next_room + '"]').data('top'));
-		$('.player').css('left', $('[data-num="' + tmp_next_room + '"]').data('left'));
+		movePlayer(tmp_next_room);
+		// setTimeout(function(){ movePlayer(tmp_next_room); }, 4000);
+		// $('.player').css('top', $('[data-num="' + tmp_next_room + '"]').data('top'));
+		// $('.player').css('left', $('[data-num="' + tmp_next_room + '"]').data('left'));
 		return 0;
 	}
 	return 1;
@@ -264,10 +266,11 @@ function setPlayerAction(action) {
 function doPlayerAction(room) {
 	resetActions();
 	if (player_action == 'move') {
-		setTimeout(function(){ movePlayer(room); }, 1500);
-		soundWalk.play();
-		$('.player').css('top', $('[data-num="' + room + '"]').data('top'));
-		$('.player').css('left', $('[data-num="' + room + '"]').data('left'));
+		movePlayer(room);
+		// setTimeout(function(){ movePlayer(room); }, 1500);
+		// soundWalk.play();
+		// $('.player').css('top', $('[data-num="' + room + '"]').data('top'));
+		// $('.player').css('left', $('[data-num="' + room + '"]').data('left'));
 	} else {
 		shootArrow(room);
 	}	
@@ -283,21 +286,26 @@ function movePlayer(location) {
 	changePlayerStatus('move');
 	if (location == 0) {
 		player.location = randomRoom();
-		$('.player').css('top', $('[data-num="' + player.location + '"]').data('top'));
-		$('.player').css('left', $('[data-num="' + player.location + '"]').data('left'));
+		// $('.player').css('top', $('[data-num="' + player.location + '"]').data('top'));
+		// $('.player').css('left', $('[data-num="' + player.location + '"]').data('left'));
 	} else {
 		player.location = location;
 	}
-	$('[data-num="' + player.location + '"]').addClass('active');
-	if (checkCurrentRoom() !== 0) {
-		player.rooms = getNextRooms(player.location);
-		$('#action-left').html(player.rooms[0]);
-		$('#action-middle').html(player.rooms[1]);
-		$('#action-right').html(player.rooms[2]);
-		checkNextRooms();
-		moveZombie();
-		showMessage(new_message);
-	}
+	soundWalk.play();
+	$('.player').css('top', $('[data-num="' + player.location + '"]').data('top'));
+	$('.player').css('left', $('[data-num="' + player.location + '"]').data('left'));
+	setTimeout(function() {
+		$('[data-num="' + player.location + '"]').addClass('active');
+		if (checkCurrentRoom() !== 0) {
+			player.rooms = getNextRooms(player.location);
+			$('#action-left').html(player.rooms[0]);
+			$('#action-middle').html(player.rooms[1]);
+			$('#action-right').html(player.rooms[2]);
+			checkNextRooms();
+			moveZombie();
+			showMessage(new_message);
+		}
+	}, 1500);
 }
 function shootArrow(location) {
 	soundShoot.play();
