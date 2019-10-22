@@ -81,7 +81,7 @@ function showMessage(message) {
 	tmp_msg_id = d.getFullYear() + '' + d.getMonth() + '' + d.getDay() + '' + d.getHours() + '' + d.getMinutes() + '' + d.getSeconds() + '' + d.getMilliseconds();
 	tmp_message = '<div class="message animated" id="' + tmp_msg_id + '">' + message + '</div>';
 	$('.messages').append(tmp_message);
-	$('#' + tmp_msg_id).addClass('fadeIn');
+	$('#' + tmp_msg_id).addClass('fadeInDown');
 	current_message = tmp_msg_id;
 	new_message = '';
 }
@@ -115,7 +115,7 @@ function createRooms() {
 		tmp_id = room[x].id;
 		tmp_top = grid_unit * room[x].top;
 		tmp_left = grid_unit * room[x].left;
-		$('.map').append('<div class="room" data-id="' + x + '" data-num="' + tmp_id + '" data-top="' + tmp_top + '" data-left="' + tmp_left + '" style="top:' + tmp_top + 'px;left:' + tmp_left + 'px;">' + tmp_id + '</div>');
+		$('.map').append('<div class="room" data-id="' + x + '" data-num="' + tmp_id + '" data-top="' + tmp_top + '" data-left="' + tmp_left + '" style="top:' + tmp_top + 'px;left:' + tmp_left + 'px;"></div>');
 	} 
 }
 function createMonsters() {
@@ -218,19 +218,19 @@ function checkNextRooms() {
 	nothing_there = 1;
 	for (i = 0; i < player.rooms.length; i++) {
 		if (player.rooms[i] == bat[0].location || player.rooms[i] == bat[1].location) {
-			new_message = new_message + '<p>I hear wings rustling.</p>';
+			new_message = new_message + '<p>You hear wings rustling.</p>';
 			nothing_there = 0;
 		}
 		if (player.rooms[i] == pit[0].location || player.rooms[i] == pit[1].location) {
-			new_message = new_message + '<p>I feel a draft.</p>';
+			new_message = new_message + '<p>You feel a draft.</p>';
 			nothing_there = 0;
 		}
 		if (player.rooms[i] == zombie.location) {
-			new_message = new_message + '<p>I hear feet shuffling.</p>';
+			new_message = new_message + '<p>You hear feet shuffling.</p>';
 			nothing_there = 0;
 		}
 		if (player.rooms[i] == krampus.location) {
-			new_message = new_message + '<p>I smell something terrible.</p>';
+			new_message = new_message + '<p>You smell something terrible.</p>';
 			nothing_there = 0;
 		}
 	}
@@ -252,16 +252,26 @@ function changePlayerStatus(status) {
 		$('[data-num="' + player.location + '"]').addClass('dead');
 	}
 }
+function setRoomClicks() {
+	$('body').on('click', '[data-num="' + player.rooms[0] + '"]', function() {
+		doPlayerAction(player.rooms[0]);
+	});
+	$('body').on('click', '[data-num="' + player.rooms[1] + '"]', function() {
+		doPlayerAction(player.rooms[1]);
+	});
+	$('body').on('click', '[data-num="' + player.rooms[2] + '"]', function() {
+		doPlayerAction(player.rooms[2]);
+	});
+}
 function setPlayerAction(action) {
 	player_action = action;
 	$('[data-num="' + player.rooms[0] + '"]').addClass('potential');
 	$('[data-num="' + player.rooms[1] + '"]').addClass('potential');
 	$('[data-num="' + player.rooms[2] + '"]').addClass('potential');
-	$('.actions-first').hide();
-	$('.actions-second').show();
+	$('.controls').addClass('fadeOut');
+	$('.controls').css('z-index', -1);
 }
 function doPlayerAction(room) {
-	resetActions();
 	if (player_action == 'move') {
 		movePlayer(room, 'walk');
 	} else {
@@ -269,11 +279,9 @@ function doPlayerAction(room) {
 	}	
 }
 function resetActions() {
-	$('#action-left').removeClass('btn-active');
-	$('#action-middle').removeClass('btn-active');
-	$('#action-right').removeClass('btn-active');
-	$('.actions-first').show();
-	$('.actions-second').hide();
+	$('.controls').removeClass('fadeOut');
+	$('.controls').addClass('fadeIn');
+	$('.controls').css('z-index', 101);
 }
 function movePlayer(location, sound) {
 	changePlayerStatus('move');
@@ -297,8 +305,9 @@ function movePlayer(location, sound) {
 			checkNextRooms();
 			moveZombie();
 			showMessage(new_message);
+			resetActions();
 		}
-	}, 1500);
+	}, 1000);
 }
 function shootArrow(location) {
 	soundShoot.play();
@@ -316,23 +325,17 @@ function shootArrow(location) {
 		changePlayerStatus('lose');
 	}
 	showMessage(new_message);
+	resetActions();
 }
 //
 // CLICK ACTIONS
 $('#action-move').click(function() {
 	setPlayerAction('move');
+	setRoomClicks();
 });
 $('#action-shoot').click(function() {
 	setPlayerAction('shoot');
-});
-$('#action-left').click(function() {
-	doPlayerAction(player.rooms[0]);
-});
-$('#action-middle').click(function() {
-	doPlayerAction(player.rooms[1]);
-});
-$('#action-right').click(function() {
-	doPlayerAction(player.rooms[2]);
+	setRoomClicks();
 });
 // INIT GAME
 function initGame() {
@@ -343,6 +346,7 @@ function initGame() {
 	$('.room').addClass('enlarge');
 	$('[data-num="' + player.location + '"]').addClass('active');
 	checkNextRooms();
+	resetActions();
 	showMessage(new_message);
 }
 $(function() {
