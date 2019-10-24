@@ -253,13 +253,13 @@ function changePlayerStatus(status) {
 	}
 }
 function setRoomClicks() {
-	$('body').on('click', '[data-num="' + player.rooms[0] + '"]', function() {
+	$('body').off('click', '[data-num="' + player.rooms[0] + '"]').on('click', '[data-num="' + player.rooms[0] + '"]', function() {
 		doPlayerAction(player.rooms[0]);
 	});
-	$('body').on('click', '[data-num="' + player.rooms[1] + '"]', function() {
+	$('body').off('click', '[data-num="' + player.rooms[1] + '"]').on('click', '[data-num="' + player.rooms[1] + '"]', function() {
 		doPlayerAction(player.rooms[1]);
 	});
-	$('body').on('click', '[data-num="' + player.rooms[2] + '"]', function() {
+	$('body').off('click', '[data-num="' + player.rooms[2] + '"]').on('click', '[data-num="' + player.rooms[2] + '"]', function() {
 		doPlayerAction(player.rooms[2]);
 	});
 }
@@ -299,9 +299,6 @@ function movePlayer(location, sound) {
 		$('[data-num="' + player.location + '"]').addClass('active');
 		if (checkCurrentRoom() !== 0) {
 			player.rooms = getNextRooms(player.location);
-			$('#action-left').html(player.rooms[0]);
-			$('#action-middle').html(player.rooms[1]);
-			$('#action-right').html(player.rooms[2]);
 			checkNextRooms();
 			moveZombie();
 			showMessage(new_message);
@@ -318,7 +315,7 @@ function shootArrow(location) {
 		new_message = '<p>You woke the Krampus and he moves!</p>';
 		moveWumpus();
 	}
-	player.arrows = player.arrows - 1;
+	player.arrows--;	
 	$('#arrows').html(player.arrows);
 	if (player.arrows <= 0) {
 		new_message = '<p>Your out of arrows and you die!</p>';
