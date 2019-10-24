@@ -186,18 +186,21 @@ function checkCurrentRoom() {
 	}
 	if (player.location == krampus.location) {
 		new_message = '<p>You ran into the Krampus and you Die!</p>';
+		$('.player').addClass('heartBeat');
 		showMessage(new_message);
 		changePlayerStatus('lose');
 		return 0;
 	}
 	if (player.location == pit[0].location || player.location == pit[1].location) {
 		new_message = '<p>You fell into a Bottomless Pit and you die!</p>';
+		$('.player').addClass('heartBeat');
 		showMessage(new_message);
 		changePlayerStatus('lose');
 		return 0;
 	}
 	if (bats_are_awake == 1) {
 		new_message = '<p>You woke some Bats and are carried to another room!</p>';
+		$('.player').addClass('heartBeat');
 		showMessage(new_message);
 		movePlayer(0, 'fly');
 		//  LEAVING THIS HERE TO CONSIDER MOVEMENT OF BATS
@@ -206,6 +209,7 @@ function checkCurrentRoom() {
 	}
 	if (player.location == zombie.location) {
 		new_message = '<p>You run into the Zombie and are forced to run!!!</p>';
+		$('.player').addClass('heartBeat');
 		showMessage(new_message);
 		player.rooms = getNextRooms(player.location);
 		tmp_next_room = player.rooms[Math.floor((Math.random() * 3))];
@@ -279,6 +283,7 @@ function doPlayerAction(room) {
 	}	
 }
 function resetActions() {
+	$('.player').removeClass('heartBeat');
 	$('.controls').removeClass('fadeOut');
 	$('.controls').addClass('fadeIn');
 	$('.controls').css('z-index', 101);
