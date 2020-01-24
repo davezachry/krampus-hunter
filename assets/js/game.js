@@ -327,7 +327,9 @@ function shootArrow(location) {
 		changePlayerStatus('lose');
 	}
 	showMessage(new_message);
-	resetActions();
+	if (location !== krampus.location && player.arrows > 0) {
+		resetActions();
+	}
 }
 //
 // CLICK ACTIONS
