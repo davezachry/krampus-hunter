@@ -296,6 +296,7 @@ function movePlayer(location, sound) {
 		player.location = location;
 	}
 	if (sound == 'walk') {
+		soundWalk.rate(1.5);
 		soundWalk.play();
 	}
 	$('.player').css('top', $('[data-num="' + player.location + '"]').data('top'));
