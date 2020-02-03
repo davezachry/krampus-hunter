@@ -126,7 +126,7 @@ body {
 	width: calc(100vw / 17);
 	background-color: #0f80ff;
 	border-radius: 50%;
-	border: 2px solid #022339;
+	border: 2px solid #eee;
 	transition: all 1s;
 	transition-timing-function: linear;
 	transform: scale(1.25,1.25);
@@ -178,7 +178,7 @@ body {
 	.controls {
 		height: calc((375px / 17) * 14);
 	}
-    .room, .player {
+    .room, .player, .krampus {
     	height: calc(375px / 17);
     	width: calc(375px / 17);
     }
